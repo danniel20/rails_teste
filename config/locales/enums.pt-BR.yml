@@ -1,0 +1,6 @@
+'pt-BR':
+  enums:
+    contact:
+      gender:
+        male: Masculino
+        female: Feminino

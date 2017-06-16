@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= Contact.human_attribute_name('name') %>:</strong>
+  <%= @contact.name %>
+</p>
+
+<p>
+  <strong><%= Contact.human_attribute_name('email') %>:</strong>
+  <%= @contact.email %>
+</p>
+
+<p>
+  <strong><%= Contact.human_attribute_name('birth_date') %>:</strong>
+  <%= @contact.birth_date.strftime('%d/%m/%Y') %>
+</p>
+
+<p>
+  <strong><%= Contact.human_attribute_name('gender') %>:</strong>
+  <%= @contact.gender_i18n %>
+</p>
+
+<p>
+  <strong><%= Contact.human_attribute_name('preferences') %>:</strong>
+  <% @contact.preferences.each do |p| %>
+  	<%= "#{p.name} | " %>
+  <%end%>
+</p>
+
+<%= link_to( t('buttons.edit'), edit_contact_path(@contact)) %> |
+<%= link_to(t('buttons.back'), contacts_path) %>

@@ -1,0 +1,6 @@
+<h1><%= t('messages.editing', model: @contact.model_name.human) %></h1>
+
+<%= render 'form', contact: @contact %>
+
+<%= link_to(t('buttons.show'), @contact) %> |
+<%= link_to(t('buttons.back'), contacts_path) %>

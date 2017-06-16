@@ -1,0 +1,25 @@
+'pt-BR':
+  activerecord:
+    models:
+      contact:
+        one: Contato
+        other: Contatos
+      address:
+        one: Endereço
+        other: Endereços
+    attributes:
+      contact:
+        id: Código
+        name: Nome
+        email: E-mail
+        birth_date: Data de nascimento
+        genre: Sexo
+        created_at: Criado em
+        updated_at: Atualizado em
+        gender: Sexo
+        preferences: Preferências
+      address:
+        street: Rua
+        zip_code: Cep
+        city: Cidade
+        state: Estado
