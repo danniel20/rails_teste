@@ -29,7 +29,7 @@
   <div class="row">
     <div class="form-group col-sm-3">
       <%= f.label :birth_date %>
-      <%= f.text_field(:birth_date, id: :contact_birth_date, value: "#{contact.birth_date.strftime("%d/%m/%Y") unless contact.birth_date.blank? }", class: "datepicker form-control") %>
+      <%= f.text_field(:birth_date, id: :contact_birth_date, value: "#{l(contact.birth_date) unless contact.birth_date.blank? }", class: "datepicker form-control") %>
     </div>
   </div>
 

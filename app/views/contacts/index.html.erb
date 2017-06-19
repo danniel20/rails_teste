@@ -18,7 +18,7 @@
       <tr>
         <td><%= contact.name %></td>
         <td><%= contact.email %></td>
-        <td><%= contact.birth_date.strftime('%d/%m/%Y') %></td>
+        <td><%= l(contact.birth_date) %></td>
         <td><%= contact.gender_i18n %></td>
         <td>
           <%= link_to(t('buttons.show'), contact) %>

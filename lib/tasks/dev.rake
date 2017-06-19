@@ -29,7 +29,7 @@ namespace :dev do
       )
     end
     
-    puts "Contados cadastrados."
+    puts "Contados cadastrados com sucesso!."
   end
 
   ###################################################################################
@@ -46,7 +46,7 @@ namespace :dev do
       )
     end
   	
-  	puts "Preferências cadastradas."
+  	puts "Preferências cadastradas com sucesso."
   end
 
   #####################################################################################
@@ -61,7 +61,7 @@ namespace :dev do
   		end
   	end
 
-  	puts "Preferências dos contatos cadastradas."
+  	puts "Preferências dos contatos cadastradas com sucesso!."
   end
 
 end

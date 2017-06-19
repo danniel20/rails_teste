@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170616172340) do
     t.integer "gender"
   end
 
-  create_table "contacts_preferences", force: :cascade do |t|
+  create_table "contacts_preferences", id: false, force: :cascade do |t|
     t.bigint "contact_id"
     t.bigint "preference_id"
     t.index ["contact_id"], name: "index_contacts_preferences_on_contact_id"

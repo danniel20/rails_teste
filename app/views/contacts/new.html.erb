@@ -1,5 +1,5 @@
 <h1> <%= t('messages.new', model: @contact.model_name.human) %> </h1>
 
-<%= render 'form', contact: @contact %>
+<%= render(partial:'form', locals: {contact: @contact}) %>
 
 <%= link_to(t('buttons.back'), contacts_path) %>
