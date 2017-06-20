@@ -7,6 +7,7 @@ namespace :dev do
   	puts "APAGANDO BD... #{%x(rails db:drop)}"
     puts "CRIANDO BD... #{%x(rails db:create)}"
     puts %x(rails db:migrate)
+    puts %x(rails db:seed)
     puts %x(rails dev:generate_contacts)
     puts %x(rails dev:generate_preferences)
     puts %x(rails dev:generate_contact_preferences)

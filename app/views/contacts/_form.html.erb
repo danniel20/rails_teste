@@ -43,7 +43,9 @@
   </div>
 
   <%= f.fields(model: :address) do |address| %>
-    
+
+    <h3><%= Address.model_name.human %></h3>
+
     <div class="row">
       <div class="form-group col-sm-3">
         <%= address.label(:street) %>
@@ -58,14 +60,15 @@
 
     <div class="row">
       <div class="form-group col-sm-3">
+        <%= address.label(:state) %>
+        <%= address.collection_select(:state, @states, :name, :name, {prompt: "Por favor selecione um estado", selected: contact.address.state}, {class: "form-control", id: "states_select"}) %>
+      </div>
+
+      <div class="form-group col-sm-3">
         <%= address.label(:city) %>
-        <%= address.text_field(:city, class: "form-control") %>
+        <%= address.collection_select(:city, @cities, :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select"}) %>
       </div>
     
-      <div class="form-group col-sm-3">
-        <%= address.label(:state) %>
-        <%= address.text_field(:state, class: "form-control") %>
-      </div>
     </div>
 
   <% end %>
@@ -83,3 +86,28 @@
     <%= f.submit(t('buttons.save'), class: "btn btn-primary") %>
   </div>
 <% end %>
+
+<script>
+  
+$(function(){
+  
+  $("#states_select").on("change", function(){
+
+    $.ajax({
+         url: 'update_cities',
+         type: 'GET',
+         dataType: 'script',
+         data: { state_name: $('#states_select option:selected').val()},
+         success: function(resp) {
+            console.log("Dynamic city select ok!");
+         },        
+         error: function( req, status, err ) {
+           console.log("Error: " + status);
+         }
+    });
+  });
+
+});
+
+</script>
+

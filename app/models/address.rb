@@ -3,5 +3,5 @@ class Address < ApplicationRecord
   belongs_to :contact
 
   # Validations
-	validates :street, :zip_code, :city, :state, presence: true
+	validates :street, :zip_code, :state, presence: true
 end
