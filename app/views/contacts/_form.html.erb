@@ -49,12 +49,10 @@
         <%= address.label(:street) %>
         <%= address.text_field(:street, class: "form-control") %>
       </div>
-    </div>
-
-    <div class="row">
+    
       <div class="form-group col-sm-3">
         <%= address.label(:zip_code) %>
-        <%= address.text_field(:zip_code, class: "form-control") %>
+        <%= address.text_field(:zip_code, class: "form-control", id: "cep") %>
       </div>
     </div>
 
@@ -63,9 +61,7 @@
         <%= address.label(:city) %>
         <%= address.text_field(:city, class: "form-control") %>
       </div>
-    </div>
-
-    <div class="row">
+    
       <div class="form-group col-sm-3">
         <%= address.label(:state) %>
         <%= address.text_field(:state, class: "form-control") %>
