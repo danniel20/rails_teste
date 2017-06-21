@@ -20,7 +20,8 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
-
+    state = State.find_by(name: @contact.address.state)
+    @cities = City.where("state_id = ?", state.id)
   end
 
   # POST /contacts
