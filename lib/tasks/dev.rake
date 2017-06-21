@@ -9,6 +9,7 @@ namespace :dev do
     puts %x(rails db:migrate)
     puts %x(rails db:seed)
     puts %x(rails dev:generate_contacts)
+    puts %x(rails dev:generate_address)
     puts %x(rails dev:generate_preferences)
     puts %x(rails dev:generate_contact_preferences)
 
@@ -21,7 +22,7 @@ namespace :dev do
   task generate_contacts: :environment do
     puts "Cadastrando Contados..."
 
-    1.times do
+    10.times do
       Contact.create!(
         name: Faker::Name.name,
         email: Faker::Internet.email,
@@ -31,6 +32,26 @@ namespace :dev do
     end
     
     puts "Contados cadastrados com sucesso!."
+  end
+
+  ###################################################################################
+
+  desc "Cria endereços para contados Fake"
+  task generate_address: :environment do
+    puts "Cadastrando ENDEREÇOS para os contatos..."
+
+    Contact.all.each do |c|
+      c.build_address(
+        zip_code: Faker::Address.postcode,
+        street: Faker::Address.street_address,
+        state: State.all.sample.name
+      )
+      state = State.find_by(name: c.address.state)
+      c.address.city = City.where("state_id = ?", state.id).sample.name
+      c.save! 
+    end
+    
+    puts "Endereços dos contatos cadastrados com sucesso!."
   end
 
   ###################################################################################

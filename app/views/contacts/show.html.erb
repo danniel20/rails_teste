@@ -21,6 +21,26 @@
 </p>
 
 <p>
+  <strong><%= Address.human_attribute_name('zip_code') %>:</strong>
+  <%= @contact.address.zip_code %>
+</p>
+
+<p>
+  <strong><%= Address.human_attribute_name('street') %>:</strong>
+  <%= @contact.address.street %>
+</p>
+
+<p>
+  <strong><%= Address.human_attribute_name('city') %>:</strong>
+  <%= @contact.address.city %>
+</p>
+
+<p>
+  <strong><%= Address.human_attribute_name('state') %>:</strong>
+  <%= @contact.address.state %>
+</p>
+
+<p>
   <strong><%= Contact.human_attribute_name('preferences') %>:</strong>
   <% @contact.preferences.each do |p| %>
   	<%= "#{p.name} | " %>
