@@ -1,0 +1,6 @@
+$("#cities_select").empty();
+$("#cities_select").attr('disabled', false);
+
+<% @cities.each do |c| %>
+	$("#cities_select").append("<option value='<%=c.name%>'><%= c.name %></option>");
+<% end %>

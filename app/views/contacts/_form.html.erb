@@ -61,12 +61,12 @@
     <div class="row">
       <div class="form-group col-sm-3">
         <%= address.label(:state) %>
-        <%= address.collection_select(:state, @states, :name, :name, {prompt: "Por favor selecione um estado", selected: contact.address.state}, {class: "form-control", id: "states_select"}) %>
+        <%= address.collection_select(:state, State.all, :name, :name, {prompt: true, selected: contact.address.state}, {class: "form-control", id: "states_select"}) %>
       </div>
 
       <div class="form-group col-sm-3">
         <%= address.label(:city) %>
-        <%= address.collection_select(:city, @cities, :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select"}) %>
+        <%= address.collection_select(:city, City.all, :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select", disabled: true}) %>
       </div>
     
     </div>
@@ -94,13 +94,11 @@ $(function(){
   $("#states_select").on("change", function(){
 
     $.ajax({
-         url: 'update_cities',
+         url: '/update_cities/' + $('#states_select option:selected').val(),
          type: 'GET',
-         dataType: 'script',
-         data: { state_name: $('#states_select option:selected').val()},
          success: function(resp) {
             console.log("Dynamic city select ok!");
-         },        
+         },
          error: function( req, status, err ) {
            console.log("Error: " + status);
          }

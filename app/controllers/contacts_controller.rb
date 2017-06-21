@@ -1,6 +1,5 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
-  before_action :load_states_and_cities, only: [:new, :edit]
 
   # GET /contacts
   # GET /contacts.json
@@ -27,7 +26,6 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    puts params
     @contact = Contact.new(contact_params)
 
     respond_to do |format|
@@ -68,7 +66,8 @@ class ContactsController < ApplicationController
   def update_cities
     state = State.find_by(name: params[:state_name])
     @cities = City.where("state_id = ?", state.id)
-    respond_to do |format|
+    
+    respond_to  do |format|
       format.js
     end
   end
@@ -77,11 +76,6 @@ class ContactsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])
-    end
-
-    def load_states_and_cities
-      @states = State.all
-      @cities = City.where("state_id = ?", State.first.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
