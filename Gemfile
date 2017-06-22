@@ -58,6 +58,9 @@ source 'https://rails-assets.org' do
  
   # Animate CSS
   gem 'rails-assets-animate-css'
+
+  # Bootstrap Notify
+  gem 'rails-assets-bootstrap.growl'
 end
 
 group :development, :test do

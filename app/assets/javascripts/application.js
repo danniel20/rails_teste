@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap.growl
 //= require bootbox
 //= require rails-ujs
 //= require_tree .
