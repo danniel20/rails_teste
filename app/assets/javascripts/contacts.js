@@ -1,3 +1,4 @@
+//= require jquery-ui
 //= require jquery-ui/widgets/datepicker
 //= require jquery-ui/i18n/datepicker-pt-BR
 //= require jquery-mask-plugin
