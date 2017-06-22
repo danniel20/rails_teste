@@ -10,6 +10,9 @@ class ContactsController < ApplicationController
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /contacts/new
