@@ -23,8 +23,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
-    state = State.find_by(name: @contact.address.state)
-    @cities = City.where("state_id = ?", state.id)
+    load_cities_by_state(@contact.address.state)
   end
 
   # POST /contacts
@@ -37,6 +36,10 @@ class ContactsController < ApplicationController
         format.html { redirect_to(contacts_path, notice: 'Contato criado com sucesso.') }
         format.json { render :show, status: :created, location: @contact }
       else
+        unless @contact.address.state.blank?
+          load_cities_by_state(@contact.address.state)
+        end
+
         format.html { render :new }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
@@ -51,6 +54,10 @@ class ContactsController < ApplicationController
         format.html { redirect_to(contacts_path, notice: 'Contato atualizado com sucesso.') }
         format.json { render :show, status: :ok, location: @contact }
       else
+        unless @contact.address.state.blank?
+          load_cities_by_state(@contact.address.state)
+        end
+        
         format.html { render :edit }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
@@ -80,6 +87,11 @@ class ContactsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])
+    end
+
+    def load_cities_by_state(state_name)
+      state = State.find_by(name: state_name)
+      @cities = City.where("state_id = ?", state.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

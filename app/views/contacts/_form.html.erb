@@ -16,6 +16,7 @@
     <div class="form-group col-sm-4">
       <%= f.label :name %>
       <%= f.text_field :name, id: :contact_name, class: "form-control" %>
+      <%= error_tag(contact, :name) %>
     </div>
   </div>
 
@@ -23,6 +24,7 @@
     <div class="form-group col-sm-4">
       <%= f.label :email %>
       <%= f.text_field :email, id: :contact_email, class: "form-control" %>
+      <%= error_tag(contact, :email) %>
     </div>
   </div>
 
@@ -30,6 +32,7 @@
     <div class="form-group col-sm-3">
       <%= f.label :birth_date %>
       <%= f.text_field(:birth_date, id: :contact_birth_date, value: "#{l(contact.birth_date) unless contact.birth_date.blank? }", class: "datepicker form-control") %>
+      <%= error_tag(contact, :birth_date) %>
     </div>
   </div>
 
@@ -40,6 +43,7 @@
         <%= b.label { b.radio_button + b.text } %>
       </div>
     <% end%>
+    <%= error_tag(contact, :gender) %>
   </div>
 
   <%= f.fields(model: :address) do |address| %>
@@ -50,11 +54,13 @@
       <div class="form-group col-sm-3">
         <%= address.label(:street) %>
         <%= address.text_field(:street, class: "form-control") %>
+        <%= error_tag(contact.address, :street) %>
       </div>
     
       <div class="form-group col-sm-3">
         <%= address.label(:zip_code) %>
         <%= address.text_field(:zip_code, class: "form-control", id: "cep") %>
+        <%= error_tag(contact.address, :zip_code) %>
       </div>
     </div>
 
@@ -62,14 +68,16 @@
       <div class="form-group col-sm-3">
         <%= address.label(:state) %>
         <%= address.collection_select(:state, State.all, :name, :name, {prompt: true, selected: contact.address.state}, {class: "form-control", id: "states_select"}) %>
+        <%= error_tag(contact.address, :state) %>
       </div>
 
       <div class="form-group col-sm-3">
         <%= address.label(:city) %>
-        <% if contact.address.city.blank? || contact.address.state.blank? %>
+        <% if contact.address.state.blank? %>
           <%= address.collection_select(:city, City.all, :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select", disabled: true}) %>
+          <%= error_tag(contact.address, :city) %>
         <% else %>
-          <%= address.collection_select(:city, @cities || [], :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select"}) %>
+          <%= address.collection_select(:city, @cities, :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select"}) %>
         <% end %>
       </div>
     
