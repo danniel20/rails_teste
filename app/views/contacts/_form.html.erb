@@ -66,10 +66,10 @@
 
       <div class="form-group col-sm-3">
         <%= address.label(:city) %>
-        <% if contact.address.city.blank? %>
+        <% if contact.address.city.blank? || contact.address.state.blank? %>
           <%= address.collection_select(:city, City.all, :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select", disabled: true}) %>
         <% else %>
-          <%= address.collection_select(:city, @cities, :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select"}) %>
+          <%= address.collection_select(:city, @cities || [], :name, :name, {prompt: true, selected: contact.address.city}, {class: "form-control", id: "cities_select"}) %>
         <% end %>
       </div>
     
