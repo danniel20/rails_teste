@@ -41,6 +41,8 @@ gem 'enum_help'
 gem 'jquery-rails'
 # JQuery UI for the Rails asset pipeline
 gem 'jquery-ui-rails'
+# A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
+gem 'kaminari'
 
 source 'https://rails-assets.org' do
   # A jQuery Plugin to make masks on form fields and HTML elements.
