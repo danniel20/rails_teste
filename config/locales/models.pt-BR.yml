@@ -7,6 +7,9 @@
       address:
         one: Endereço
         other: Endereços
+      phone:
+        one: Telefone
+        other: Telefones
     attributes:
       contact:
         id: Código
@@ -23,3 +26,5 @@
         zip_code: Cep
         city: Cidade
         state: Estado
+      phone:
+        number: Número

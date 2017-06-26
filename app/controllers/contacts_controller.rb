@@ -57,7 +57,7 @@ class ContactsController < ApplicationController
         unless @contact.address.state.blank?
           load_cities_by_state(@contact.address.state)
         end
-        
+
         format.html { render :edit }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
@@ -97,9 +97,8 @@ class ContactsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
       params.require(:contact).permit(:name, :email, :birth_date, :gender, :preference_ids => [],
-        :address_attributes =>[
-                                :street, :zip_code, :city, :state
-                              ]
+        :address_attributes =>[:street, :zip_code, :city, :state],
+        :phones_attributes => [:id, :number, :_destroy]
       )
     end
 end

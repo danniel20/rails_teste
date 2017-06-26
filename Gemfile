@@ -45,6 +45,8 @@ gem 'jquery-ui-rails'
 gem 'kaminari'
 # Translations for the kaminari gem
 gem 'kaminari-i18n'
+# Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms
+gem "cocoon"
 
 source 'https://rails-assets.org' do
   # A jQuery Plugin to make masks on form fields and HTML elements.
@@ -74,6 +76,8 @@ group :development, :test do
   gem 'faker'
   #Better error page Rack apps
   gem 'better_errors'
+  # Rails >=3 pry initializer
+  gem 'pry-rails'
 end
 
 group :development do

@@ -46,9 +46,8 @@
     <%= error_tag(contact, :gender) %>
   </div>
 
+  <h3><%= Address.model_name.human %></h3>
   <%= f.fields(model: :address) do |address| %>
-
-    <h3><%= Address.model_name.human %></h3>
 
     <div class="row">
       <div class="form-group col-sm-3">
@@ -84,6 +83,16 @@
     </div>
 
   <% end %>
+
+  <h3><%= Phone.model_name.human(count: 2) %></h3>
+  
+  <div id="phones">    
+    <%= f.fields(model: :phones) do |phone| %>
+      <%= render(partial: 'phone_fields', locals: {f: phone}) %>
+    <% end %>
+
+    <%= link_to_add_association('[Adicionar Telefone]', f, :phones) %>
+  </div>
 
   <div class="form-group">
     <%= f.label(:preferences) %>

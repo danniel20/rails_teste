@@ -12,6 +12,7 @@ namespace :dev do
     puts %x(rails dev:generate_address)
     puts %x(rails dev:generate_preferences)
     puts %x(rails dev:generate_contact_preferences)
+    puts %x(rails dev:generate_contact_phones)
 
     puts "Setup executado com sucesso!"
   end
@@ -75,15 +76,33 @@ namespace :dev do
 
   desc "Cria Preferências para contatos Fake"
   task generate_contact_preferences: :environment do
-  	puts "Cadastrando Preferências dos contatos..."
+    puts "Cadastrando Preferências dos contatos..."
+
+    Contact.all.each do |c|
+      Preference.all.sample(Random.rand(3)).each do |p|
+        c.preferences << p
+      end
+    end
+
+    puts "Preferências dos contatos cadastradas com sucesso!."
+  end
+
+  #####################################################################################
+
+  desc "Cria Telefones para contatos Fake"
+  task generate_contact_phones: :environment do
+  	puts "Cadastrando Telefones dos contatos..."
 
 	 	Contact.all.each do |c|
-  		Preference.all.sample(Random.rand(3)).each do |p|
-	  		c.preferences << p
-  		end
+  		Random.rand(1..3).times do
+        Phone.create!(
+          number: Faker::PhoneNumber.phone_number,
+          contact: c
+        )
+      end
   	end
 
-  	puts "Preferências dos contatos cadastradas com sucesso!."
+  	puts "Telefones dos contatos cadastradas com sucesso!."
   end
 
 end
