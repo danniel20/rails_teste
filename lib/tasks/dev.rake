@@ -13,6 +13,7 @@ namespace :dev do
     puts %x(rails dev:generate_preferences)
     puts %x(rails dev:generate_contact_preferences)
     puts %x(rails dev:generate_contact_phones)
+    puts %x(rails dev:generate_contact_images)
 
     puts "Setup executado com sucesso!"
   end
@@ -91,18 +92,32 @@ namespace :dev do
 
   desc "Cria Telefones para contatos Fake"
   task generate_contact_phones: :environment do
-  	puts "Cadastrando Telefones dos contatos..."
+    puts "Cadastrando Telefones dos contatos..."
 
-	 	Contact.all.each do |c|
-  		Random.rand(1..3).times do
+    Contact.all.each do |c|
+      Random.rand(1..3).times do
         Phone.create!(
           number: Faker::PhoneNumber.phone_number,
           contact: c
         )
       end
+    end
+
+    puts "Telefones dos contatos cadastradas com sucesso!."
+  end
+
+  #####################################################################################
+
+  desc "Cria Imagens para contatos Fake"
+  task generate_contact_images: :environment do
+  	puts "Cadastrando Telefones dos contatos..."
+
+	 	Contact.all.each do |c|
+  		c.picture = File.new(Rails.root.join('public', 'images-for-contacts', "#{Random.rand(1..7)}.jpg"), 'r')
+      c.save!
   	end
 
-  	puts "Telefones dos contatos cadastradas com sucesso!."
+  	puts "Imagens dos contatos cadastradas com sucesso!."
   end
 
 end

@@ -17,6 +17,7 @@
         email: E-mail
         birth_date: Data de nascimento
         genre: Sexo
+        picture: Foto
         created_at: Criado em
         updated_at: Atualizado em
         gender: Sexo

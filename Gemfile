@@ -46,7 +46,9 @@ gem 'kaminari'
 # Translations for the kaminari gem
 gem 'kaminari-i18n'
 # Dynamic nested forms using jQuery made easy; works with formtastic, simple_form or default forms
-gem "cocoon"
+gem 'cocoon'
+# Easy file attachment management for ActiveRecord
+gem 'paperclip', "~> 5.0.0"
 
 source 'https://rails-assets.org' do
   # A jQuery Plugin to make masks on form fields and HTML elements.
