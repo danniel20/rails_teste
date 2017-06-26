@@ -83,9 +83,9 @@
     </div>
   <% end %>
 
-  <h3><%= Phone.model_name.human(count: 2) %></h3>
   
   <div id="phones">    
+    <h3><%= Phone.model_name.human(count: 2) %></h3>
     <%= link_to_add_association('[Adicionar Telefone]', f, :phones) %>
     
     <%= f.fields(model: :phones) do |phone| %>
