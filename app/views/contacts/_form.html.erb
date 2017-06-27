@@ -141,8 +141,8 @@ $(function(){
     reader.onload = function(file) {
       var image_base64 = file.target.result;
       $previewImg.attr("src", image_base64);
-      $previewImg.css("maxWidth", "200px");
-      $previewImg.css("maxHeight", "200px");
+      $previewImg.css("maxWidth", "100px");
+      $previewImg.css("maxHeight", "100px");
     }
     reader.readAsDataURL(image);
   });
