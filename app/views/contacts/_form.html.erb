@@ -10,13 +10,13 @@
   </div>
 <% end %>
 
-<%= form_with(model: contact, local: true) do |f| %>
+<%= form_with(model: contact, local: true, html: {multipart: true}) do |f| %>
   
   <div class="row">
     <div class="form-group col-sm-4">
       <%= f.label :picture %>
-      <%= image_tag(contact.picture.url(:medium)) %>
-      <%= f.file_field :picture, class: "btn" %>
+      <%= image_tag(contact.picture.url(:medium), id: "previewImg") %>
+      <%= f.file_field :picture, id: "pictureId", class: "btn" %>
     </div>
   </div>
 
@@ -120,7 +120,6 @@
 $(function(){
   
   $("#states_select").on("change", function(){
-
     $.ajax({
          url: '/update_cities/' + $('#states_select option:selected').val(),
          type: 'GET',
@@ -131,6 +130,19 @@ $(function(){
            console.log("Error: " + status);
          }
     });
+  });
+
+  $("#pictureId").on("change", function(event) {
+    var $previewImg = $("#previewImg");
+
+    var files = event.target.files;
+    var image = files[0]
+    var reader = new FileReader();
+    reader.onload = function(file) {
+      image_base64 = file.target.result;
+      $previewImg.attr("src", image_base64);
+    }
+    reader.readAsDataURL(image);
   });
 
 });

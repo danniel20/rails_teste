@@ -8,7 +8,7 @@ class Contact < ApplicationRecord
 	has_one :address, validate: true, dependent: :destroy
 	accepts_nested_attributes_for :address
 
-	has_many :phones
+	has_many :phones, dependent: :destroy
 	accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
 
 	# paperclip
