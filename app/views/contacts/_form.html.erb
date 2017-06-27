@@ -139,8 +139,10 @@ $(function(){
     var image = files[0]
     var reader = new FileReader();
     reader.onload = function(file) {
-      image_base64 = file.target.result;
+      var image_base64 = file.target.result;
       $previewImg.attr("src", image_base64);
+      $previewImg.css("maxWidth", "200px");
+      $previewImg.css("maxHeight", "200px");
     }
     reader.readAsDataURL(image);
   });
