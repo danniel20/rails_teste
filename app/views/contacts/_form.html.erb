@@ -111,7 +111,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit(t('buttons.save'), class: "btn btn-primary") %>
+    <%= f.button(t('buttons.save'), class: "btn btn-primary", data: {disable_with: "Salvando..."}) %>
   </div>
 <% end %>
 
