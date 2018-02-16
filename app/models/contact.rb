@@ -17,4 +17,7 @@ class Contact < ApplicationRecord
 
 	# Validations
 	validates :name, :email, :birth_date, :gender, presence: true
+
+	# Scopes
+	scope :search, -> (term, page) { where("lower(name) LIKE ?", "%#{term.downcase}%").page(page).per(5)}
 end
