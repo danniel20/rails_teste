@@ -5,7 +5,7 @@ class Contact < ApplicationRecord
 	# Associations
 	has_and_belongs_to_many :preferences
 	
-	has_one :address, validate: true, dependent: :destroy
+	has_one :address, dependent: :destroy
 	accepts_nested_attributes_for :address
 
 	has_many :phones, dependent: :destroy
