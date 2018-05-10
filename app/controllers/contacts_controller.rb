@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact, only: [:show, :edit, :update]
 
   # GET /contacts
   # GET /contacts.json
@@ -67,10 +67,15 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   # DELETE /contacts/1.json
   def destroy
-    @contact.destroy
+    @contacts = Contact.find(params[:id].split(","))
+
+    @contacts.each do |contact|
+      contact.destroy
+    end
+
     respond_to do |format|
       format.html { redirect_to contacts_url, notice: 'Contato removido com sucesso.' }
-      format.json { head :no_content }
+      format.json { render json: {"msg": "Contato removido com sucesso"} }
     end
   end
 
