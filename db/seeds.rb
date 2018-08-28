@@ -6,45 +6,38 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts "Cadastrando os ESTADOS..."
+# CADASTRANDO ESTADOS
 
-states = [
-	"Ceará",
-	"Pernambuco",
-	"Rio Grande do Norte",
-	"São Paulo",
-	"Rio de Janeiro",
-	"Bahia",
-	"Rio Grande do Sul",
-	"Minas Gerais"
+ceara = State.create!(name: "Ceará")
+pernambuco = State.create!(name: "Pernambuco")
+rio_grande_do_norte = State.create!(name: "Rio Grande do Norte")
+bahia = State.create!(name: "Bahia")
+sao_paulo = State.create!(name: "São Paulo")
+rio_de_janeiro = State.create!(name: "Rio de Janeiro")
+rio_grande_do_sul = State.create!(name: "Rio Grande do Sul")
+minas_gerais = State.create!(name: "Minas Gerais")
+
+
+# CADASTRANDO CIDADES
+
+cities = [	
+	{name: "Fortaleza", state: ceara},
+	{name: "Caucaia", state: ceara},
+	{name: "Maracanaú", state: ceara},
+	{name: "Recife", state: pernambuco},
+	{name: "Olinda", state: pernambuco},
+	{name: "Natal", state: rio_grande_do_norte},
+	{name: "São Paulo", state: sao_paulo},
+	{name: "Guarulhos", state: sao_paulo},
+	{name: "Santos", state: sao_paulo},
+	{name: "Rio de Janeiro", state: rio_de_janeiro},
+	{name: "Niterói", state: rio_de_janeiro},
+	{name: "Salvador", state: bahia},
+	{name: "Vitória da Conquista", state: bahia},
+	{name: "Porto Alegre", state: rio_grande_do_sul},
+	{name: "Santa Maria", state: rio_grande_do_sul},
+	{name: "Belo Horizonte", state: minas_gerais},
+	{name: "Uberlândia", state: minas_gerais}
 ]
 
-states.each do |s|
-	State.create!(name: s)
-end
-
-puts "ESTADOS cadastrados com sucesso!"
-
-####################################################################################
-
-puts "Cadastrando as CIDADES"
-
-City.create!(name: "Fortaleza", state_id: State.find_by(name: "Ceará").id)
-City.create!(name: "Caucaia", state_id: State.find_by(name: "Ceará").id)
-City.create!(name: "Maracanaú", state_id: State.find_by(name: "Ceará").id)
-City.create!(name: "Recife", state_id: State.find_by(name: "Pernambuco").id)
-City.create!(name: "Olinda", state_id: State.find_by(name: "Pernambuco").id)
-City.create!(name: "Natal", state_id: State.find_by(name: "Rio Grande do Norte").id)
-City.create!(name: "São Paulo", state_id: State.find_by(name: "São Paulo").id)
-City.create!(name: "Guarulhos", state_id: State.find_by(name: "São Paulo").id)
-City.create!(name: "Santos", state_id: State.find_by(name: "São Paulo").id)
-City.create!(name: "Rio de Janeiro", state_id: State.find_by(name: "Rio de Janeiro").id)
-City.create!(name: "Niterói", state_id: State.find_by(name: "Rio de Janeiro").id)
-City.create!(name: "Salvador", state_id: State.find_by(name: "Bahia").id)
-City.create!(name: "Vitória da Conquista", state_id: State.find_by(name: "Bahia").id)
-City.create!(name: "Porto Alegre", state_id: State.find_by(name: "Rio Grande do Sul").id)
-City.create!(name: "Santa Maria", state_id: State.find_by(name: "Rio Grande do Sul").id)
-City.create!(name: "Belo Horizonte", state_id: State.find_by(name: "Minas Gerais").id)
-City.create!(name: "Uberlândia", state_id: State.find_by(name: "Minas Gerais").id)
-
-puts "CIDADES cadastradas com sucesso!"
+City.create!(cities)
