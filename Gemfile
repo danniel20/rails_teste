@@ -52,6 +52,8 @@ gem 'paperclip', "~> 5.0.0"
 
 gem "font-awesome-rails"
 
+gem 'tty-spinner'
+
 source 'https://rails-assets.org' do
   # A jQuery Plugin to make masks on form fields and HTML elements.
   gem 'rails-assets-jquery-mask-plugin'
@@ -70,6 +72,7 @@ source 'https://rails-assets.org' do
 
   # Fontawesome
   #gem 'rails-assets-fontawesome'
+
 end
 
 group :development, :test do
