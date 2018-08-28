@@ -1,28 +1,24 @@
 namespace :dev do
-  desc "Setup Development"
+  desc "Configura ambiente de desenvolvimento"
   task setup: :environment do
 
-  	puts "Executando o setup para desenvolvimento..."
+  	show_spinner("APAGANDO BD..."){ %x(rails db:drop)}
+    show_spinner("CRIANDO BD..."){ %x(rails db:create)}
+    show_spinner("MIGRANDO BD..."){ %x(rails db:migrate)}
+    show_spinner("EXECUTANDO db:seed ..."){ %x(rails db:seed)}
+    show_spinner("Cadastrando Contados..."){%x(rails dev:generate_contacts)}
+    show_spinner("Cadastrando Endereços para os contatos..."){%x(rails dev:generate_address)}
+    show_spinner("Cadastrando Preferências...") {%x(rails dev:generate_preferences)}
+    show_spinner("Cadastrando Preferências dos Contatos...") {%x(rails dev:generate_contact_preferences)}
+    show_spinner("Cadastrando Telefones dos Contatos..."){%x(rails dev:generate_contact_phones)}
+    show_spinner("Cadastrando Imagens dos Contatos") {%x(rails dev:generate_contact_images)}
 
-  	puts "APAGANDO BD... #{%x(rails db:drop)}"
-    puts "CRIANDO BD... #{%x(rails db:create)}"
-    puts %x(rails db:migrate)
-    puts %x(rails db:seed)
-    puts %x(rails dev:generate_contacts)
-    puts %x(rails dev:generate_address)
-    puts %x(rails dev:generate_preferences)
-    puts %x(rails dev:generate_contact_preferences)
-    puts %x(rails dev:generate_contact_phones)
-    puts %x(rails dev:generate_contact_images)
-
-    puts "Setup executado com sucesso!"
   end
 
   ###################################################################################
 
   desc "Cria Contatos Fake"
   task generate_contacts: :environment do
-    puts "Cadastrando Contados..."
 
     10.times do
       Contact.create!(
@@ -33,14 +29,12 @@ namespace :dev do
       )
     end
     
-    puts "Contados cadastrados com sucesso!."
   end
 
   ###################################################################################
 
   desc "Cria endereços para contados Fake"
   task generate_address: :environment do
-    puts "Cadastrando ENDEREÇOS para os contatos..."
 
     Contact.all.each do |c|
       c.build_address(
@@ -52,15 +46,13 @@ namespace :dev do
       c.address.city = City.where("state_id = ?", state.id).sample.name
       c.save! 
     end
-    
-    puts "Endereços dos contatos cadastrados com sucesso!."
+  
   end
 
   ###################################################################################
 
   desc "Cria Preferências"
   task generate_preferences: :environment do
-  	puts "Cadastrando Preferências..."
 
     preferences = %w(jogos cinema televisão internet tecnologia esportes livros)
 
@@ -70,14 +62,12 @@ namespace :dev do
       )
     end
   	
-  	puts "Preferências cadastradas com sucesso."
   end
 
   #####################################################################################
 
   desc "Cria Preferências para contatos Fake"
   task generate_contact_preferences: :environment do
-    puts "Cadastrando Preferências dos contatos..."
 
     Contact.all.each do |c|
       Preference.all.sample(Random.rand(3)).each do |p|
@@ -85,14 +75,12 @@ namespace :dev do
       end
     end
 
-    puts "Preferências dos contatos cadastradas com sucesso!."
   end
 
   #####################################################################################
 
   desc "Cria Telefones para contatos Fake"
   task generate_contact_phones: :environment do
-    puts "Cadastrando Telefones dos contatos..."
 
     Contact.all.each do |c|
       Random.rand(1..3).times do
@@ -103,21 +91,27 @@ namespace :dev do
       end
     end
 
-    puts "Telefones dos contatos cadastradas com sucesso!."
   end
 
   #####################################################################################
 
   desc "Cria Imagens para contatos Fake"
   task generate_contact_images: :environment do
-  	puts "Cadastrando Telefones dos contatos..."
 
 	 	Contact.all.each do |c|
   		c.picture = File.new(Rails.root.join('public', 'images-for-contacts', "#{Random.rand(1..7)}.jpg"), 'r')
       c.save!
   	end
 
-  	puts "Imagens dos contatos cadastradas com sucesso!."
   end
+
+  private
+
+    def show_spinner(msg_start, msg_end = "Concluído!")
+      spinner = TTY::Spinner.new("[:spinner] #{msg_start}")
+      spinner.auto_spin
+      yield
+      spinner.success("(#{msg_end})")
+    end
 
 end
